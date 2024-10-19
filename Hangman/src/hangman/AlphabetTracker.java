@@ -13,7 +13,7 @@ public class AlphabetTracker {
         incorrectLetters = new HashSet<>();
     }
 
-    // Добавить правильную букву
+
     public void addCorrectLetter(char letter) {
         correctLetters.add(letter);
     }
@@ -37,4 +37,8 @@ public class AlphabetTracker {
         }
         System.out.println();
     }
+    public boolean isLetterUsed(char letter) {
+        return correctLetters.contains(letter) || incorrectLetters.contains(letter);
+    }
+
 }

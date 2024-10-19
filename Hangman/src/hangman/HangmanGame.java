@@ -53,9 +53,14 @@ public class HangmanGame {
             char guessedLetter = getValidInput(scanner);
 
             if (!processGuess(guessedLetter)) {
-                livesLeft--;
-                alphabetTracker.addIncorrectLetter(guessedLetter);
-                System.out.println("Incorrect! Lives remaining: " + livesLeft);
+
+                if (alphabetTracker.isLetterUsed(guessedLetter)) {
+                    //System.out.println("You already tried this incorrect letter. No life lost.");
+                } else {
+                    livesLeft--;
+                    alphabetTracker.addIncorrectLetter(guessedLetter);
+                    System.out.println("Incorrect! Lives remaining: " + livesLeft);
+                }
             } else {
                 alphabetTracker.addCorrectLetter(guessedLetter);
             }
@@ -80,6 +85,9 @@ public class HangmanGame {
             if (input.length() != 1 || !Character.isLetter(input.charAt(0))) {
                 System.out.println("Invalid input! Enter one letter.");
             }
+        else if (alphabetTracker.isLetterUsed(input.charAt(0))) {
+            System.out.println("You've already used this letter. Try a different one.");
+        }
         } while (input.length() != 1 || !Character.isLetter(input.charAt(0)));
         return input.charAt(0);
     }
